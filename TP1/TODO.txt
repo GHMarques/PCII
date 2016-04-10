@@ -1,0 +1,3 @@
+1) A data/hora  de  cancelamento  deve  ser  superior  à  data/hora  mais  recente  de  chamada originada pelo número registrada no sistema
+2) Número   de   origem   deve   ser   um   número   ativo   no   sistema   (ou   seja,   sem   data   de cancelamento informada).
+3) As datas/horas de início e de fim da chamada devem ser iguais ou superiores à data/hora de ativação.
