@@ -6,6 +6,8 @@
 package Principal;
 
 import Interface.Menu;
+import java.text.ParseException;
+import java.util.Scanner;
 
 /**
  *
@@ -16,10 +18,16 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         Menu mMenu = new Menu();
-        mMenu.MenuPrincipal();
-        mMenu.SubMenuTipoPlano();
+        Scanner scnEntrada = new Scanner(System.in);
+        boolean blnSair = false;
+        //mMenu.MenuPrincipal();
+        do{
+            mMenu.EscolheMenu(-2);
+            System.out.print("Opção: ");
+            blnSair = mMenu.EscolheMenu(scnEntrada.nextInt());
+        }while (blnSair == false);
         System.out.println("Programa encerrado!");
     }
     

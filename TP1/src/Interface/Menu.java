@@ -5,6 +5,9 @@
  */
 package Interface;
 
+import Controlador.Controlador;
+import java.text.ParseException;
+
 /**
  *
  * @author Gustavo Marques
@@ -12,9 +15,9 @@ package Interface;
  */
 
 public class Menu {
-    /**
-     * Tipo  de  Plano, Cliente, Numero  de  Telefone, Chamada Originada,Relatóriose  Sair
-     */
+    private int intMenuAtual = 0;
+    private Controlador cControlador = new Controlador();
+    
     public void MenuPrincipal(){
         System.out.println("**********************************************");
         System.out.println("*                    Menu                    *");
@@ -88,5 +91,188 @@ public class Menu {
         System.out.println("* 2) Conta de telefone                       *");
         System.out.println("* 3) Voltar                                  *");
         System.out.println("**********************************************");
+    }
+    
+    public boolean EscolheMenu(int intMenu) throws ParseException{
+        boolean blnRetorno = false;
+        switch(this.intMenuAtual){
+            case 0:
+                MenuPrincipal();
+                this.intMenuAtual = 1;
+                break;
+            case 1: //Menu Principal
+                switch(intMenu){
+                    case -1:
+                        MenuPrincipal();
+                        break;
+                    case 1:
+                        SubMenuTipoPlano();
+                        this.intMenuAtual = 2;
+                        break;
+                    case 2:
+                        SubMenuCliente();
+                        this.intMenuAtual = 3;
+                        break;
+                    case 3:
+                        SubMenuNumeroTelefone();
+                        this.intMenuAtual = 4;
+                        break;
+                    case 4:
+                        SubMenuChamadaOriginada();
+                        this.intMenuAtual = 5;
+                        break;
+                    case 5:
+                        SubMenuRelatorios();
+                        this.intMenuAtual = 6;
+                        break;
+                    case 6:
+                        blnRetorno = true;
+                        break;
+                    default:
+                        OpcaoInvalida();
+                        break;
+                }
+                break;
+            case 2: //SubMenuTipoPlano
+                switch(intMenu){
+                    case -1:
+                        SubMenuTipoPlano();
+                        break;        
+                    case 1:
+                        cControlador.CadastrarTipoPlano();
+                        break;
+                    case 2:
+                        cControlador.AlterarTipoPlano();
+                        break;
+                    case 3:
+                        cControlador.ExcluirTipoPlano();
+                        break;
+                    case 4:
+                        cControlador.ListarTipoPlano();
+                        break;
+                    case 5:
+                        cControlador.PesquisarTipoPlano();
+                        break;
+                    case 6:
+                        this.intMenuAtual = 0;
+                        break;
+                    default:
+                        OpcaoInvalida();
+                        break;
+                }
+                break;
+            case 3: //SubMenuCliente
+                switch(intMenu){
+                    case -1:
+                        SubMenuCliente();
+                        break;
+                    case 1:
+                        cControlador.CadastrarCliente();
+                        break;
+                    case 2:
+                        cControlador.AlterarCliente();
+                        break;
+                    case 3:
+                        cControlador.ExcluirCliente();
+                        break;
+                    case 4:
+                        cControlador.ListarCliente();
+                        break;
+                    case 5:
+                        cControlador.PesquisarCliente();
+                        break;
+                    case 6:
+                        this.intMenuAtual = 0;
+                        break;
+                    default:
+                        OpcaoInvalida();
+                        break;
+                }
+                break;
+            case 4: //SubMenuNumeroTelefone
+                switch(intMenu){
+                    case -1:
+                        SubMenuNumeroTelefone();
+                        break;
+                    case 1:
+                        cControlador.CadastrarNumeroTelefone();
+                        break;
+                    case 2:
+                        cControlador.AlterarNumeroTelefone();
+                        break;
+                    case 3:
+                        cControlador.ExcluirNumeroTelefone();
+                        break;
+                    case 4:
+                        cControlador.CancelarNumeroTelefone();
+                        break;
+                    case 5:
+                        cControlador.ListarNumeroTelefone();
+                        break;
+                    case 6:
+                        cControlador.PesquisarNumeroTelefone();
+                        break;
+                    case 7:
+                        this.intMenuAtual = 0;
+                        break;
+                    default:
+                        OpcaoInvalida();
+                        break;
+                }
+                break;
+            case 5: //SubMenuChamadaOriginada
+                switch(intMenu){
+                    case -1:
+                        SubMenuChamadaOriginada();
+                        break;
+                    case 1:
+                        cControlador.RegistrarChamada();
+                        break;
+                    case 2:
+                        cControlador.ExcluirChamada();
+                        break;
+                    case 3:
+                        cControlador.ListarChamada();
+                        break;
+                    case 4:
+                        cControlador.PesquisarChamada();
+                        break;
+                    case 5:
+                        this.intMenuAtual = 0;
+                        break;
+                    default:
+                        OpcaoInvalida();
+                        break;
+                }
+                break;
+            case 6: //SubMenuRelatorios
+                switch(intMenu){
+                    case -1:
+                        SubMenuRelatorios();
+                        break;
+                    case 1:
+                        cControlador.ExibeNumerosTelefonicosCliente();
+                        break;
+                    case 2:
+                        cControlador.Conta();
+                        break;
+                    case 3:
+                        this.intMenuAtual = 0;
+                        break;
+                    default:
+                        OpcaoInvalida();
+                        break;
+                }
+                break;
+        }
+        
+        return blnRetorno;
+    }
+    
+    public void OpcaoInvalida() throws ParseException{
+        /*System.out.println("**********************************************");
+        System.out.println("*              Opção inválida!!              *");
+        System.out.println("**********************************************");*/
+        EscolheMenu(-1);
     }
 }
